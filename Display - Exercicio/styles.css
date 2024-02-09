@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.carro {
+  background-color: rgb(20, 20, 22);
+  color: azure;
+  margin: 24px;
+  padding: 20px;
+  border-radius: 4px;
+}
+h2 {
+  margin: 0px;
+}
+.bicicleta {
+  background-color: rgb(20, 20, 22);
+  color: azure;
+  margin: 24px;
+  padding: 20px;
+  border-radius: 4px;
+}
+button {
+  background-color: gold;
+  align-items: center;
+  font-size: 14px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  border: transparent;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.titulo {
+  color: black;
+  font-size: 32px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 80px;
+}
+p {
+  color: #b2b2b2;
+}
+span {
+  color: gold;
+}
