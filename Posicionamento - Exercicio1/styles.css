@@ -1,0 +1,107 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f7f7;
+  margin: 0px;
+  display: grid;
+  gap: 60px;
+  justify-items: center;
+  margin-top: 60px;
+}
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+}
+p,
+h1,
+h2,
+h3 {
+  margin: 0px;
+}
+p {
+  font-size: 20px;
+}
+.home-buttons {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.home-buttons a {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+}
+.conteudo-bike {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1000px;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+.bikecraft {
+  height: 300px;
+}
+.bike {
+  display: grid;
+  position: relative;
+  background-color: white;
+  align-content: center;
+  padding: 40px;
+  text-align: right;
+  gap: 20px;
+  justify-items: end;
+}
+.detalhe {
+  width: 60px;
+  height: 4px;
+  background-color: #e21;
+  position: absolute;
+  top: 30px;
+  right: -30px;
+}
+.detalhe-2 {
+  width: 60px;
+  height: 4px;
+  background-color: #e21;
+  position: absolute;
+  bottom: 30px;
+  right: -30px;
+}
+.button-vermais,
+.button-vermais a {
+  background-color: #e21;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 20px;
+}
+.subtitulo {
+  font-size: 64px;
+  color: rgb(167, 167, 167);
+  text-align: end;
+  padding: 40px;
+  align-self: center;
+}
+.itens {
+  background-color: white;
+  padding: 40px;
+}
+.vantagens-itens {
+  display: grid;
+  gap: 10px 20px;
+  grid-template-columns: 40px 1fr;
+  padding: 10px;
+}
+.vantagens-itens p {
+  grid-column: 2;
+}
+.footer {
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
