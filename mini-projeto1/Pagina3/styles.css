@@ -1,0 +1,78 @@
+h1 {
+  text-align: center;
+  color: rgb(98, 43, 226);
+  font-size: 2.4rem;
+}
+body {
+  text-align: center;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.inicio {
+  width: 500px;
+  padding: 20px;
+  text-align: center;
+  margin: 50px auto 10px auto;
+}
+p {
+  font-size: 1.1rem;
+}
+.botao-principal {
+  color: white;
+  background-color: rgb(6, 133, 175);
+  border-radius: 8px;
+  padding: 20px 30px;
+  font-size: 1.1rem;
+  margin: 10px;
+  border: 0px;
+}
+
+table {
+  border: 2px solid transparent;
+  height: 450px;
+  width: 1650px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+}
+td,
+th {
+  border: 2px solid gray;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+th {
+  color: rgb(156, 156, 156);
+}
+.celula-vazia {
+  border: 0px solid transparent;
+}
+.linha {
+  text-align: left;
+}
+.colunas {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+}
+#coluna1 {
+  background-color: rgb(128, 175, 190);
+}
+#coluna2 {
+  background-color: rgb(87, 97, 240);
+}
+#coluna3 {
+  background-color: rgb(103, 55, 236);
+}
+.button-colunas {
+  border: 0px;
+  background-color: rgb(128, 175, 190);
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  width: 250px;
+  height: 50px;
+}
