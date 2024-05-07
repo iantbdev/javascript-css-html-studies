@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Contatos</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-bs-theme="dark">
+    <header style="background-color: #6200EE; text-align: center">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" style="margin-left: 10px" href="exer.html">Agenda de contatos</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="exer.html">Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crudmaker.html">Categorias</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <h1 style="margin-top: 10px;">Escolha suas categorias</h1>
+        <h3 small class="text-muted">Leia, cadastre, atualize ou remova as categorias dos seus tipos de contatos</h3>
+        <img src="/5421749_2810817.svg" style="width: 300px; height: auto;" alt="fazendo o CRUD">
+    </header>
+    <div class="container">
+        <h2 style="text-align: center;">Altere as Categorias</h2>
+        <form id="add-contact-form" class="form-horizontal">
+            <div class="form-floating" style="margin-bottom: 20px;">
+                <select class="form-select" name="tipo_contato" id="tipo_contato">
+                    <!-- <option selected>Tipo de contato</option> -->
+                    <option value="trabalho">Trabalho</option>
+                    <option value="escola">Escola</option>
+                    <option value="amigo">Amigo</option>
+                    <option value="familia">Familia</option>
+                </select>
+                <label for="floatingSelect">Escolha o tipo do seu contato</label>
+            </div>
+            <input type="text" id="categoria" name="categoria" class="form-control" style="margin-bottom: 20px;" placeholder="Nova Categoria" required>
+            <form id="add-contact-form" class="form-horizontal">
+                <button type="submit" class="btn btn-outline-primary" id="btn_addCategoria" style="display: inline-block;">Adicionar Categoria</button>
+                <button type="submit" class="btn btn-outline-danger" id="btn_removeCatagoria" style="display: inline-block;">Deletar Categoria</button>
+            </form>
+    </div>
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            <p>&copy; 2024 Agenda de Contatos</p>
+        </div>
+    </footer>
+
+    <script src="script2.js"></script>
+</body>
+
+</html>

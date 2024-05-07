@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda de Contatos</title>
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-bs-theme="dark">
+  <header style="background-color: #6200EE; text-align: center">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" style="margin-left: 10px;" href="exer.html">Agenda de contatos</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="exer.html">Home </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="crudmaker.html">Categorias</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <h1 style="margin-top: 10px;">Agenda de Contatos</h1>
+    <h3 small class="text-muted">Concecte-se com outros. Crie contatos.</h3>
+    <img src="Contact_Us.svg" style="width: 300px; height: auto;" alt="imagem_contato">
+  </header>
+  <div class="container">
+
+    <div id="filters" style="margin-bottom: 10px;">
+      <button class="btn" onclick="filterSelection('all')">Show all</button>
+      <button class="btn" onclick="filterSelection('favorito')">Favoritos</button>
+      <button class="btn" onclick="filterSelection('amigo')">Amigos</button>
+      <button class="btn" onclick="filterSelection('trabalho')">Trabalho</button>
+      <button class="btn" onclick="filterSelection('escola')">Escola</button>
+      <button class="btn" onclick="filterSelection('familia')">Família</button>
+    </div>
+
+    <div id="contact-list" class="border-white rounded"></div>
+    <form id="add-contact-form" class="form-horizontal">
+      <h2 style="text-align: center;">Adicionar Novo Contato</h2>
+      <input type="text" id="name" name="name" class="form-control" style="margin-bottom: 20px;" placeholder="Nome" required>
+      <input type="tel" id="phone" name="phone" class="form-control" style="margin-bottom: 20px;" placeholder="Número de Telefone" required>
+      <input type="email" id="email" name="email" class="form-control" style="margin-bottom: 20px;" placeholder="E-mail" required>
+      <input type="text" id="bio" name="bio" class="form-control" style="margin-bottom: 20px;" placeholder="Biografia">
+      <input type="url" id="pagina_pessoal" name="pagina_pessoal" class="form-control" style="margin-bottom: 20px;" placeholder="URL da Página Pessoal">
+      <input type="url" id="photo" name="photo" class="form-control" style="margin-bottom: 20px;" placeholder="URL da Foto">
+
+      <div class="form-floating" style="margin-bottom: 20px;">
+        <select class="form-select" name="tipo_contato" id="tipo_contato">
+          <!-- <option selected>Tipo de contato</option> -->
+          <option value="trabalho">Trabalho</option>
+          <option value="escola">Escola</option>
+          <option value="amigo">Amigo</option>
+          <option value="familia">Familia</option>
+        </select>
+        <label for="floatingSelect">Escolha o tipo do seu contato</label>
+      </div>
+      <div class="form-floating" style="margin-bottom: 20px;">
+        <select class="form-select" name="check_favorito" id="check_favorito">
+          <!-- <option selected>Tipo de contato</option> -->
+          <option value="nao_favorito">Não</option>
+          <option value="favorito">Sim</option>
+        </select>
+        <label for="floatingSelect">Deseja favoritar o contato?</label>
+      </div>
+
+
+      <button type="submit" class="btn btn-outline-primary" id="botao_submit" style="width: 100%;">Adicionar Contato</button>
+    </form>
+  </div>
+  <footer class="bg-body-tertiary text-center text-lg-start">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+      <p>&copy; 2024 Agenda de Contatos</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
