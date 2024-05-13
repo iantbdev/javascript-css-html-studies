@@ -44,65 +44,137 @@ function listContacts() {
 function submitContact(event) {
   event.preventDefault(); // Evita o envio padrão do formulário
 
+  var submit = document.getElementById("botao_submit");
   const formData = new FormData(addContactForm);
-  const contactData = {
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    email: formData.get("email"),
-    photo: formData.get("photo") || "https://via.placeholder.com/100", // Foto padrão
-    bio: formData.get("bio"),
-    pagina_pessoal: formData.get("pagina_pessoal"),
-    tipo_contato: formData.get("tipo_contato"),
-    check_favorito: formData.get("check_favorito"),
-  };
 
-  addContact(contactData)
-    .then(() => {
-      return fetchContacts();
-    })
-    .then((contacts) => {
-      renderContacts(contacts);
-      addContactForm.reset(); // Limpa os campos do formulário
-    })
-    .catch((error) => {
-      console.error("Houve um problema ao adicionar o contato:", error);
-    });
+  if (submit.textContent !== "EDITAR") {
+    const contactData = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      photo: formData.get("photo") || "https://via.placeholder.com/100", // Foto padrão
+      bio: formData.get("bio"),
+      pagina_pessoal: formData.get("pagina_pessoal"),
+      tipo_contato: formData.get("tipo_contato"),
+      check_favorito: formData.get("check_favorito"),
+    };
+
+    // console.log(submitButton.textContent);
+
+    addContact(contactData)
+      .then(() => {
+        return fetchContacts();
+      })
+      .then((contacts) => {
+        renderContacts(contacts);
+        addContactForm.reset(); // Limpa os campos do formulário
+      })
+      .catch((error) => {
+        console.error("Houve um problema ao adicionar o contato:", error);
+      });
+  } else {
+    const nomeContato = document.getElementById("name").value.trim();
+
+    // Itera sobre os nós filhos do contactList
+    for (let i = 0; i < contactList.childNodes.length; i++) {
+      const childNode = contactList.childNodes[i];
+
+      // Acessa o elemento filho com o h3
+      const nameElement = childNode.querySelector("h3");
+
+      if (nameElement.textContent.trim() === nomeContato) {
+        const phoneElement = childNode.querySelector(".phone");
+        const emailElement = childNode.querySelector(".email");
+        const biografiaElement = childNode.querySelector(".biografia");
+        // const tipoElement = childNode.querySelector(".tipo_contato");
+
+        phoneElement.textContent = `Telefone: ${phoneMask(phone.value)}`;
+        emailElement.textContent = `Email: ${email.value}`;
+        biografiaElement.textContent = bio.value;
+        // tipoElement.textContent = `Tipo de contato: ${tipo_contato.value}`;
+
+        // console.log(childNode);
+
+        const updatedData = {
+          name: nameElement.textContent.trim(),
+          phone: phone.value,
+          email: email.value,
+          bio: bio.value,
+          tipo_contato: tipo_contato.value,
+          photo: photo.value,
+          pagina_pessoal: pagina_pessoal.value,
+          check_favorito: check_favorito.value,
+        };
+
+        updateContact(childNode.dataset.name, updatedData);
+
+        break;
+      }
+    }
+
+    // console.log(contactList);
+    submit.textContent = "Adicionar Contato";
+  }
 }
 
 // Função para buscar contatos na API
 function fetchContacts() {
-  return (
-    fetch(
-      "https://agenda-de-contatos-84164-default-rtdb.firebaseio.com/contacts.json"
-    )
-      // https://imd0404-webi-default-rtdb.firebaseio.com/contacts.json
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Resposta de rede não foi ok");
-        }
-        return response.json();
-      })
-      .then((contacts) => {
-        const contactsList = [];
-        for (let key in contacts) {
-          const contact = new Contact({
-            id: key,
-            name: contacts[key].name,
-            phone: contacts[key].phone,
-            email: contacts[key].email,
-            photo: contacts[key].photo,
-            bio: contacts[key].bio,
-            pagina_pessoal: contacts[key].pagina_pessoal,
-            tipo_contato: contacts[key].tipo_contato,
-            check_favorito: contacts[key].check_favorito,
-          });
+  return fetch(
+    "https://agenda-de-contatos-84164-default-rtdb.firebaseio.com/contacts.json"
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Resposta de rede não foi ok");
+      }
+      return response.json();
+    })
+    .then((contacts) => {
+      const contactsList = [];
+      for (let key in contacts) {
+        const contact = new Contact({
+          id: key,
+          name: contacts[key].name,
+          phone: contacts[key].phone,
+          email: contacts[key].email,
+          photo: contacts[key].photo,
+          bio: contacts[key].bio,
+          pagina_pessoal: contacts[key].pagina_pessoal,
+          tipo_contato: contacts[key].tipo_contato,
+          check_favorito: contacts[key].check_favorito,
+        });
 
-          //contacts.push({ id: key, ...data[key] });
-          contactsList.push(contact);
-        }
-        return contactsList;
-      })
-  );
+        //contacts.push({ id: key, ...data[key] });
+        contactsList.push(contact);
+      }
+      return contactsList;
+    });
+}
+
+function updateContact(contactId, updatedData) {
+  return fetch(
+    `https://agenda-de-contatos-84164-default-rtdb.firebaseio.com/contacts/${contactId}.json`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    }
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Falha ao atualizar o contato");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // console.log("Contato atualizado com sucesso:", data);
+      window.location = window.location; // reload da pagina
+    })
+    .catch((error) => {
+      console.error("Erro ao atualizar o contato:", error);
+      throw error;
+    });
 }
 
 function emailMask(email) {
@@ -121,7 +193,7 @@ function emailMask(email) {
 function addContact(contactData) {
   return fetch(
     "https://agenda-de-contatos-84164-default-rtdb.firebaseio.com/contacts.json",
-    // https://imd0404-webi-default-rtdb.firebaseio.com/contacts.json
+
     {
       method: "POST",
       headers: {
@@ -167,6 +239,7 @@ function createContactCard(contact) {
   const contactCard = document.createElement("div");
   contactCard.className = "hidden";
   contactCard.classList.add("contact");
+
   contactCard.style =
     "border: 5px solid #6200EE; border-style: dashed; padding: 10px; margin-bottom: 10px;";
 
@@ -179,16 +252,20 @@ function createContactCard(contact) {
 
   const name = document.createElement("h3");
   name.textContent = contact.name;
+  contactCard.setAttribute("data-name", contact.id);
 
   const phone = document.createElement("p");
   phoneMask(phone.textContent);
+  phone.className = "phone";
   phone.textContent = `Telefone: ${phoneMask(contact.phone)}`;
-  // phone.textContent = `Telefone: ${contact.phone}`;
+  phone.style = "margin-top: 10px;";
 
   const email = document.createElement("p");
+  email.className = "email";
   email.textContent = `Email: ${contact.email}`;
 
   const biografia = document.createElement("p");
+  biografia.className = "biografia";
   biografia.textContent = `${contact.bio}`;
 
   const site_contato = document.createElement("a");
@@ -196,8 +273,10 @@ function createContactCard(contact) {
   site_contato.href = contact.pagina_pessoal;
   site_contato.target = "_blank";
 
-  const tipo = document.createElement("p");
-  tipo.textContent = `Tipo de contato: ${contact.tipo_contato}`;
+  // const tipo = document.createElement("p");
+  // tipo.textContent = `Tipo de contato: ${contact.tipo_contato}`;
+
+  //adiciona o tipo de contato como classe
   contactCard.classList.add(contact.tipo_contato);
 
   const botao_favorita = document.createElement("button");
@@ -205,11 +284,10 @@ function createContactCard(contact) {
   botao_favorita.className = "btn btn-outline-light";
   botao_favorita.style = "margin: 10px";
 
-  const estrela = document.createElement("p");
-  estrela.textContent = "☆ ★ ✮ ★ ☆☆ ★ ✮ ★ ☆★";
+  const estrela = document.createElement("h1");
+  estrela.textContent = "★";
+  estrela.style = "float: right; text-align: right;";
   estrela.classList.add("estrela");
-
-  // contactCard.classList.add(contact.check_favorito);
 
   // botao de favoritar
   botao_favorita.addEventListener("click", function (e) {
@@ -262,13 +340,12 @@ function createContactCard(contact) {
     var inputCheck = document.getElementById("check_favorito");
     inputCheck.value = contact.check_favorito;
 
-    alert("Edição para fazer.");
+    alert("Edição para fazer no formulário.");
     const submitToEdit = document.getElementById("botao_submit");
     submitToEdit.textContent = "EDITAR";
 
     submitToEdit.addEventListener("click", function () {
-      alert("Edição realizada");
-      submitToEdit.textContent = "Adicionar Contato";
+      alert("Edição realizada!");
     });
   });
 
@@ -294,15 +371,13 @@ function createContactCard(contact) {
     alert("Contato deletado");
   });
 
-  const checkbox = document.getElementById("check_favorito");
-
   contactCard.appendChild(photo);
   contactCard.appendChild(name);
-  // contactCard.appendChild(site_contato);
+  contactCard.appendChild(site_contato);
   contactCard.appendChild(phone);
   contactCard.appendChild(email);
   contactCard.appendChild(biografia);
-  contactCard.appendChild(tipo);
+  // contactCard.appendChild(tipo);
   contactCard.appendChild(botao_favorita);
   contactCard.appendChild(botao_edita);
   contactCard.appendChild(botao_deleta);
@@ -312,6 +387,8 @@ function createContactCard(contact) {
     contactCard.classList.add("estrela");
     contactCard.classList.add(contact.check_favorito);
   }
+
+  console.log(contactCard);
 
   return contactCard;
 }
@@ -328,6 +405,8 @@ function deleteContact(contactId) {
     }
   });
 }
+
+// filtro para os contastos
 
 filterSelection("all");
 function filterSelection(c) {
