@@ -59,15 +59,13 @@ function submitContact(event) {
       check_favorito: formData.get("check_favorito"),
     };
 
-    // console.log(submitButton.textContent);
-
     addContact(contactData)
       .then(() => {
         return fetchContacts();
       })
       .then((contacts) => {
         renderContacts(contacts);
-        addContactForm.reset(); // Limpa os campos do formulário
+        addContactForm.reset();
       })
       .catch((error) => {
         console.error("Houve um problema ao adicionar o contato:", error);
@@ -92,8 +90,6 @@ function submitContact(event) {
         emailElement.textContent = `Email: ${email.value}`;
         biografiaElement.textContent = bio.value;
         // tipoElement.textContent = `Tipo de contato: ${tipo_contato.value}`;
-
-        // console.log(childNode);
 
         const updatedData = {
           name: nameElement.textContent.trim(),
@@ -150,6 +146,7 @@ function fetchContacts() {
     });
 }
 
+// função que atualiza os contatos
 function updateContact(contactId, updatedData) {
   return fetch(
     `https://agenda-de-contatos-84164-default-rtdb.firebaseio.com/contacts/${contactId}.json`,
@@ -175,18 +172,6 @@ function updateContact(contactId, updatedData) {
       console.error("Erro ao atualizar o contato:", error);
       throw error;
     });
-}
-
-function emailMask(email) {
-  var emailMasked = email.replace(/([^@\.])/g, "*").split("");
-  var previous = "";
-  for (i = 0; i < emailMasked.length; i++) {
-    if (i <= 1 || previous == "." || previous == "@") {
-      emailMasked[i] = email[i];
-    }
-    previous = email[i];
-  }
-  return emailMasked.join("");
 }
 
 // Função para adicionar contato na API
@@ -225,6 +210,7 @@ function renderContacts(contacts) {
   });
 }
 
+// Máscara para o telefone
 function phoneMask(phone) {
   return phone
     .replace(/\D/g, "")
@@ -298,7 +284,6 @@ function createContactCard(contact) {
       contactCard.classList.remove("estrela");
       contactCard.classList.remove("favorito");
 
-      //alerta de que a operação deu certo
       alert("Contato retirado dos favoritos.");
       contact.check_favorito = "nao_favorito";
       console.log(contact.check_favorito);
@@ -308,7 +293,6 @@ function createContactCard(contact) {
       contactCard.classList.add("estrela");
       contactCard.classList.add("favorito");
 
-      //alerta de que a operação deu certo
       alert("Contato adicionado aos favoritos");
       contact.check_favorito = "favorito";
       console.log(contact.check_favorito);
@@ -393,6 +377,7 @@ function createContactCard(contact) {
   return contactCard;
 }
 
+// função para deletar o contato
 function deleteContact(contactId) {
   return fetch(
     `https://agenda-de-contatos-84164-default-rtdb.firebaseio.com/contacts/${contactId}.json`,
@@ -406,8 +391,7 @@ function deleteContact(contactId) {
   });
 }
 
-// filtro para os contastos
-
+// filtro para os contatos
 filterSelection("all");
 function filterSelection(c) {
   var x, i;
@@ -443,6 +427,7 @@ function showRemoveClass(element, name) {
   element.className = arr1.join(" ");
 }
 
+// mantém o efeito de botão clicado
 var btnContainer = document.getElementById("filters");
 var btns = btnContainer.getElementsByClassName("btn");
 for (var i = 0; i < btns.length; i++) {
