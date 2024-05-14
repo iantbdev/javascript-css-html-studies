@@ -29,7 +29,7 @@
     </nav>
     <h1 style="margin-top: 10px;">Agenda de Contatos</h1>
     <h3 small class="text-muted">Concecte-se com outros. Crie contatos.</h3>
-    <img src="Contact_Us.svg" style="width: 300px; height: auto;" alt="imagem_contato">
+    <img src="img/Contact_Us.svg" style="width: 300px; height: auto;" alt="imagem_contato">
   </header>
   <div class="container">
 
@@ -42,7 +42,7 @@
       <button class="btn" onclick="filterSelection('familia')">Família</button>
     </div>
 
-    <div id="contact-list" class="border-white rounded"></div>
+    <div id="contact-list" class="border-white rounded" data-name="Nome"></div>
     <form id="add-contact-form" class="form-horizontal">
       <h2 style="text-align: center;">Adicionar Novo Contato</h2>
       <input type="text" id="name" name="name" class="form-control" style="margin-bottom: 20px;" placeholder="Nome" required>
@@ -54,11 +54,7 @@
 
       <div class="form-floating" style="margin-bottom: 20px;">
         <select class="form-select" name="tipo_contato" id="tipo_contato">
-          <!-- <option selected>Tipo de contato</option> -->
-          <option value="trabalho">Trabalho</option>
-          <option value="escola">Escola</option>
-          <option value="amigo">Amigo</option>
-          <option value="familia">Familia</option>
+
         </select>
         <label for="floatingSelect">Escolha o tipo do seu contato</label>
       </div>
@@ -81,7 +77,8 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/script2.js"></script>
 </body>
 
 </html>
