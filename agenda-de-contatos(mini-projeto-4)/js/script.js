@@ -267,7 +267,7 @@ function createContactCard(contact) {
 
   const botao_favorita = document.createElement("button");
   botao_favorita.textContent = "⭐️";
-  botao_favorita.className = "btn btn-outline-light";
+  botao_favorita.className = "btn btn-outline-primary";
   botao_favorita.style = "margin: 10px";
 
   const estrela = document.createElement("h1");
@@ -302,7 +302,7 @@ function createContactCard(contact) {
   // botao de editar
   const botao_edita = document.createElement("button");
   botao_edita.textContent = `Editar contato`;
-  botao_edita.className = "btn btn-outline-light";
+  botao_edita.className = "btn btn-outline-info";
 
   botao_edita.addEventListener("click", function (e) {
     var input = document.getElementById("name");
