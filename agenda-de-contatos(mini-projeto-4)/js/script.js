@@ -351,8 +351,8 @@ function createContactCard(contact) {
         .catch((error) => {
           console.error("Houve um problema ao deletar o contato:", error);
         });
+      alert("Contato deletado");
     }
-    alert("Contato deletado");
   });
 
   contactCard.appendChild(photo);
